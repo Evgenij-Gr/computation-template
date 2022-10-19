@@ -3,7 +3,7 @@ import pandas as pd
 import dyn_tools as dynt
 from grid import gridNodeToUpdate, gridNodeToDict, GridPoint
 from stuart_landau import StuartLandau
-from workers_utils import getTaskParams, register, fullInit, makeFinalOutname
+from workers_utils import getTaskParams, register, fullInit, makeFinalOutname, idlePost
 
 registry = {
     "worker": {},
@@ -13,6 +13,8 @@ registry = {
 
 registry['init']['approachTime'] = fullInit
 registry['init']['poincareMap'] = fullInit
+
+registry['post']['poincareMap'] = idlePost
 
 
 def makeSystem(gridNode, config):

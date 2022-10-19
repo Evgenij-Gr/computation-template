@@ -3,9 +3,9 @@ class StuartLandau:
 
     def __init__(self, r, omega, s):
         self.r = r
-        assert omega > 0., "omega must be greater than zero!"
+        assert omega > 0., "'omega' must be greater than zero!"
         self.omega = omega
-        assert s > 0, "alpha must be greater than zero!"
+        assert s > 0, "'s' must be greater than zero!"
         self.s = s
 
     def setParams(self, paramDict):

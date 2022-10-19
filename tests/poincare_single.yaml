@@ -1,0 +1,53 @@
+# a config for bi-parametric sweep
+# in parameters s and alpha
+# "defaultSystem" describes default parameter values
+# for studied system; system is always created with
+# these parameters first
+defaultSystem:
+  alpha: 1
+  s: 4
+  omega: 1
+# grid describes parameter sweeps
+# it must have either "first" AND "second" keys (biparametric),
+# or "first" only (single parameter)
+# each of these dictionaries must have following keys:
+# "min": minimal parameter value
+# "max":  maximal parameter value
+# "steps": how many nodes between [min, max] including endpoints
+# "caption": LaTeX version of parameter name, used for plotting
+grid:
+  first:
+    max: 1.5
+    steps: 5
+    name: s
+    min: 0.5
+    caption: "s"
+# parameters for solve_ivp
+solver:
+  rtol: 1.0e-13
+  atol: 1.0e-13
+  maxT: 100
+  method: RK45
+# name of the task to perform
+task: poincareMap
+# next entry must have the same name as value for "task" key
+# stores parameters for performing task function, depens on what
+# task function needs
+poincareMap:
+  minX: -1.6
+  maxX: -0.4
+  steps: 201
+approachTime:
+  ptX: 0.5
+  ptY: 0.0
+  delta: 1e-6
+# information for saving files
+# "directory": where save it
+# "mask": what is the prefix
+# "useTimeStamp": "folder" or "file",
+# - "folder": creates folder with timestamp name and saves everything there
+# - "file": appends timestamp after "mask" for each saved file
+output:
+  directory: "./out/"
+  mask: poincare_single
+  useTimestamp: ignore

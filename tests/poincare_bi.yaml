@@ -1,0 +1,64 @@
+# a config for bi-parametric sweep
+# in parameters s and alpha
+# "defaultSystem" describes default parameter values
+# for studied system; system is always created with
+# these parameters first
+defaultSystem:
+  s: 1
+  r: 1
+  omega: 1
+# grid describes parameter sweeps
+# it must have either "first" AND "second" keys (biparametric),
+# or "first" only (single parameter)
+# each of these dictionaries must have following keys:
+# "min": minimal parameter value
+# "max":  maximal parameter value
+# "steps": how many nodes between [min, max] including endpoints
+# "caption": LaTeX version of parameter name, used for plotting
+grid:
+  second:
+    max: 5
+    steps: 5
+    name: omega
+    min: 3
+    caption: \omega
+  first:
+    max: 1.5
+    steps: 3
+    name: s
+    min: 0.5
+    caption: s
+# parameters for solve_ivp
+solver:
+  rtol: 1.0e-13
+  atol: 1.0e-13
+  maxT: 100
+  method: RK45
+# name of the task to perform
+task: poincareMap
+# next entry must have the same name as value for "task" key
+# stores parameters for performing task function, depens on what
+# task function needs
+poincareMap:
+  minX: -1.6
+  maxX: -0.4
+  steps: 101
+# information for saving files
+# "directory": where save it
+# "mask": what is the prefix
+# "useTimeStamp": "folder" or "file",
+# - "ignore": ignores timestamp and uses "directory" and "mask" as is
+# - "file": appends timestamp after "mask" for each saved file
+# - "folder": creates folder with timestamp name and saves everything there
+# "imageExtension": used specifically for images
+output:
+  directory: "./out/"
+  mask: poincare_bi
+  useTimestamp: ignore
+  imageExtension: png
+# some functions might use additional keyword-arguments
+# we can pass them through "misc" dictionary
+misc:
+  plotParams:
+    labelFontsize: 20
+    titleFontsize: 24

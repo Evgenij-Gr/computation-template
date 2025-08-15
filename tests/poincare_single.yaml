@@ -4,7 +4,7 @@
 # for studied system; system is always created with
 # these parameters first
 defaultSystem:
-  alpha: 1
+  s: 1
   r: 4
   omega: 1
 # grid describes parameter sweeps
@@ -51,3 +51,8 @@ output:
   directory: "./out/"
   mask: poincare_single
   useTimestamp: ignore
+  imageExtension: png
+misc:
+  plotParams:
+    labelFontsize: 20
+    titleFontsize: 24

@@ -14,7 +14,7 @@ if __name__ == "__main__":
     print(f"Config files detected: {', '.join(configs)}")
 
     for cfg in configs:
-        subprocess.run(f'python ../grid_compute.py {cfg}')
+        subprocess.run(f'python ../main_sl.py {cfg}')
 
     hasMismatches = False
     if CHECK:

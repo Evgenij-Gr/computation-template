@@ -9,7 +9,7 @@ from itertools import product
 import yaml
 
 import grid
-import workers as wrk
+import workers_sl as wrk
 
 if __name__ == "__main__":
     if '-h' in sys.argv or '--help' in sys.argv or len(sys.argv) != 2:

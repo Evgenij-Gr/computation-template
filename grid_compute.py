@@ -12,8 +12,10 @@ import grid
 import workers as wrk
 
 if __name__ == "__main__":
-    if '-h' in sys.argv or '--help' in sys.argv:
-        print("Usage: python grid_compute.py <pathToConfig>"
+    if '-h' in sys.argv or '--help' in sys.argv or len(sys.argv) != 2:
+        if len(sys.argv) != 2:
+            print(f"Wrong number of arguments, {len(sys.argv)-1} were given!")
+        print(f"Script usage: python {os.path.basename(sys.argv[0])} <pathToConfig>"
               "\n    pathToConfig: full path to configuration file (e.g., \"./cfg.yaml\")")
         sys.exit()
 

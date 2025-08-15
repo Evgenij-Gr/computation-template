@@ -5,7 +5,7 @@
 # these parameters first
 defaultSystem:
   alpha: 1
-  s: 4
+  r: 4
   omega: 1
 # grid describes parameter sweeps
 # it must have either "first" AND "second" keys (biparametric),

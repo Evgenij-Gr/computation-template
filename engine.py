@@ -8,8 +8,6 @@ import yaml
 import os
 import sys
 
-ENGINES = {}
-
 
 def parseArguments(argv):
     if '-h' in argv or '--help' in argv or len(argv) != 2:
@@ -45,9 +43,6 @@ def multiprocessing_engine(worker, configDict, startTime, initResult, dataGrid):
     return workerResult
 
 
-ENGINES['mp'] = multiprocessing_engine
-
-
 def simple_loop_iter_engine(worker, configDict, startTime, initResult, dataGrid):
     start = time.time()
     workerResult = list(map(partial(worker, config=configDict,
@@ -59,25 +54,17 @@ def simple_loop_iter_engine(worker, configDict, startTime, initResult, dataGrid)
     return workerResult
 
 
-ENGINES['iter'] = simple_loop_iter_engine
-
-
-def compute(configDict, workersRegistry, engineRegistry):
+def workflow(configDict, initFunc, worker, engine, postProcess):
     startTime = datetime.datetime.today().strftime('%Y-%m-%d_%H-%M-%S')
     print(f"\nStarted at {startTime}")
     taskName = configDict['task']
     print(f"Task name: {taskName}")
-    initFunc = workersRegistry['init'][taskName]
     print("INIT STAGE")
     initResult = initFunc(configDict, startTime)
 
     dataGrid = grid.getGrid(configDict)
-    worker = workersRegistry['worker'][taskName]
-    engine = ENGINES[engineRegistry[taskName]]
     print("COMPUTE STAGE")
     workerResult = engine(worker, configDict, startTime, initResult, dataGrid)
 
-    # define the post processing
-    postProcess = workersRegistry['post'][taskName]
     print("POSTPROCESSING STAGE")
     postProcess(configDict, initResult, workerResult, dataGrid, startTime)
